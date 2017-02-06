@@ -27,8 +27,11 @@
     <ul>
       <li v-for="thing in things">{{ thing }}</li>
     </ul>
+
     <label>Check this out</label><br>
-    <input type="text" v-model='someMessage'><br>
+    <input type="text" v-model='someMessage' @change.prevent="onSubmit">
+    <button @click.prevent="onSubmit">Add</button><br>
+
     <h4>{{ someMessage }}</h4>
     <h5>{{ someReverseMessage }}</h5>
   </div>
@@ -53,7 +56,13 @@
       }
     },
     methods: {
-
+      clearInput () {
+        this.someMessage = ''
+      },
+      onSubmit () {
+        this.things.push(this.someMessage)
+        this.clearInput()
+      }
     },
     directives: {
 
