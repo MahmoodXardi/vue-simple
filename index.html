@@ -33,11 +33,12 @@
     <button @click.prevent="onSubmit">Add</button><br>
 
     <h4>{{ someMessage }}</h4>
-    <h5>{{ someReverseMessage }}</h5>
+    <h5 v-colour="{ colour: 'red' }">{{ someReverseMessage }}</h5>
   </div>
 
   <script src="vue.js"></script>
   <script>
+
   new Vue({
     el: '#app',
     data: {
@@ -65,7 +66,9 @@
       }
     },
     directives: {
-
+      'colour': function (el, binding) {
+        el.style.color = binding.value.colour
+      }
     },
     filters: {
 
