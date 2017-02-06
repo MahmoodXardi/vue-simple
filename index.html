@@ -23,6 +23,13 @@
 
   <div id="app">
     <h1>{{ message }}</h1>
+
+    <ul>
+      <li v-for="thing in things">{{ thing }}</li>
+    </ul>
+    <label>Check this out</label><br>
+    <input type="text" v-model='someMessage'><br>
+    <h4>{{ someMessage }}</h4>
   </div>
 
   <script src="vue.js"></script>
@@ -31,8 +38,16 @@
     el: '#app',
     data: {
       message: 'BAM',
+      things: [
+        'here\'s a thing',
+        'this is another thing',
+        'writing things is fun',
+        'don\'tcha know'
+      ],
+      someMessage: ''
     },
-    computed: {      }
+    computed: {
+
     },
     methods: {
 
