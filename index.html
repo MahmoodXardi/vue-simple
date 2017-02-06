@@ -30,6 +30,7 @@
     <label>Check this out</label><br>
     <input type="text" v-model='someMessage'><br>
     <h4>{{ someMessage }}</h4>
+    <h5>{{ someReverseMessage }}</h5>
   </div>
 
   <script src="vue.js"></script>
@@ -47,7 +48,9 @@
       someMessage: ''
     },
     computed: {
-
+      someReverseMessage () {
+        return this.someMessage.split('').reverse().join('')
+      }
     },
     methods: {
 
