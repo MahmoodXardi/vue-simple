@@ -7,8 +7,22 @@
   <title>Simple Vue example</title>
 </head>
 <body>
+
+  <style>
+    * {
+      font-family: Arial;
+    }
+    #app {
+      margin: 20%;
+      text-align: center;
+    }
+    ul {
+      text-align: left;
+    }
+  </style>
+
   <div id="app">
-    {{message}}
+    <h1>{{ message }}</h1>
   </div>
 
   <script src="vue.js"></script>
@@ -16,7 +30,18 @@
   new Vue({
     el: '#app',
     data: {
-      message: 'YOLO'
+      message: 'BAM',
+    },
+    computed: {      }
+    },
+    methods: {
+
+    },
+    directives: {
+
+    },
+    filters: {
+
     }
   })
   </script>
