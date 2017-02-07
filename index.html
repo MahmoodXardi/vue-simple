@@ -7,7 +7,6 @@
   <title>Simple Vue example</title>
 </head>
 <body>
-
   <style>
     * {
       font-family: Arial;
@@ -25,7 +24,7 @@
     <h1>{{ message }}</h1>
 
     <ul>
-      <li v-for="thing in things">{{ thing }}</li>
+      <thing v-for="thing in things" :thing="thing"></thing>
     </ul>
 
     <label>Check this out</label><br>
@@ -34,48 +33,76 @@
 
     <h4>{{ someMessage }}</h4>
     <h5 v-colour="{ colour: 'red' }">{{ someReverseMessage | uppercase }}</h5>
+
   </div>
 
-  <script src="vue.js"></script>
-  <script>
-
-  new Vue({
-    el: '#app',
-    data: {
-      message: 'BAM',
-      things: [
-        'here\'s a thing',
-        'this is another thing',
-        'writing things is fun',
-        'don\'tcha know'
-      ],
-      someMessage: ''
-    },
-    computed: {
-      someReverseMessage () {
-        return this.someMessage.split('').reverse().join('')
-      }
-    },
-    methods: {
-      clearInput () {
-        this.someMessage = ''
-      },
-      onSubmit () {
-        this.things.push(this.someMessage)
-        this.clearInput()
-      }
-    },
-    directives: {
-      'colour': function (el, binding) {
-        el.style.color = binding.value.colour
-      }
-    },
-    filters: {
-      uppercase: function (value) {
-        return value.toUpperCase()
-      }
-    }
-  })
-  </script>
+  <template id="thing-template">
+    <li>
+      {{ thing.body }}  <strong>Liked:</strong> {{ thing.liked }} times
+      <button @click="liked">Like</button>
+    </li>
+  </template>
 </body>
+<script src="vue.js"></script>
+<script>
+Vue.component('thing', {
+  template: '#thing-template',
+  props: ['thing'],
+  methods: {
+    liked () {
+      this.thing.liked += 1
+    }
+  }
+})
+
+new Vue({
+  el: '#app',
+  data: {
+    message: 'BAM',
+    things: [
+      {
+        body: 'here\'s a thing',
+        liked: 4
+      },
+      {
+        body: 'this is another thing',
+        liked: 6
+      },
+      {
+        body: 'writing things is fun',
+        liked: 8
+      },
+      {
+        body: 'don\'tcha know',
+        liked: 1
+      }
+    ],
+    someMessage: ''
+  },
+  computed: {
+    someReverseMessage () {
+      return this.someMessage.split('').reverse().join('')
+    }
+  },
+  methods: {
+    clearInput () {
+      this.someMessage = ''
+    },
+    onSubmit () {
+      this.things.push({body: this.someMessage, liked: 0})
+      this.clearInput()
+    }
+  },
+  directives: {
+    'colour': function (el, binding) {
+      el.style.color = binding.value.colour
+    }
+  },
+  filters: {
+    uppercase: function (value) {
+      return value.toUpperCase()
+    }
+  }
+})
+</script>
 </html>
