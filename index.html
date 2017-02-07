@@ -33,7 +33,7 @@
     <button @click.prevent="onSubmit">Add</button><br>
 
     <h4>{{ someMessage }}</h4>
-    <h5 v-colour="{ colour: 'red' }">{{ someReverseMessage }}</h5>
+    <h5 v-colour="{ colour: 'red' }">{{ someReverseMessage | uppercase }}</h5>
   </div>
 
   <script src="vue.js"></script>
@@ -71,7 +71,9 @@
       }
     },
     filters: {
-
+      uppercase: function (value) {
+        return value.toUpperCase()
+      }
     }
   })
   </script>
